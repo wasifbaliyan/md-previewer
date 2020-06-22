@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import marked from "marked";
 import "./App.css";
 
@@ -29,43 +29,43 @@ const initialState = `
   \`\`\`
 
   ![React](https://robohash.org/adjfas?size=150x150)
+
+
+© wasifbaliyan 
 `;
 
-class App extends React.Component {
-  state = {
-    text: initialState
+export default function App() {
+  const [text, setText] = useState(initialState);
+  const handleChange = (e) => {
+    setText(e.target.value);
   };
-  handleChange = e => {
-    this.setState({ text: e.target.value });
-  };
-  render() {
-    const { text } = this.state;
-    const markdown = marked(text, { breaks: true });
-    return (
-      <div className="container">
-        <h1 className="m-4 text-center">Markdown Previewer</h1>
-        <div className="row ">
-          <div className="col col-lg-6">
-            <h6>Enter Markdown here:</h6>
-            <textarea
-              className="preview"
-              onChange={this.handleChange}
-              value={text}
-              id="editor"
-            />
-          </div>
-          <div className="col col-lg-6 my-3 ">
-            <h6>See the result:</h6>
-            <div
-              className="preview"
-              id="preview"
-              dangerouslySetInnerHTML={{ __html: markdown }}
-            ></div>
-          </div>
+  const markdown = marked(text, { breaks: true });
+
+  return (
+    <div className="container">
+      <h1 style={{ fontWeight: "300" }} className="m-5 text-center">
+        Markdown Previewer
+      </h1>
+      <div className="row ">
+        <div className="col-sm-12 col-lg-6 ">
+          <h3 style={{ fontWeight: "300" }}>Enter Markdown here:</h3>
+          <textarea
+            style={{ width: "100%" }}
+            className="preview px-3 shadow-lg"
+            onChange={handleChange}
+            value={text}
+            id="editor"
+          />
+        </div>
+        <div className="col-sm-12 col-lg-6">
+          <h3 style={{ fontWeight: "300" }}>See the result:</h3>
+          <div
+            className="preview p-5 shadow-lg"
+            id="preview"
+            dangerouslySetInnerHTML={{ __html: markdown }}
+          ></div>
         </div>
       </div>
-    );
-  }
+    </div>
+  );
 }
-
-export default App;

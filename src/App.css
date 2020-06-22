@@ -4,10 +4,11 @@
 
 body {
   background: #2ecc71;
+  font-family: Poppins;
 }
 .preview {
-  min-height: 400px;
-  min-width: 300px;
+  min-height: 800px;
+
   border: 2px solid grey;
   padding: 5px;
   background: #fff;
